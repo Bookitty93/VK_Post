@@ -2,9 +2,9 @@ fun main() {
     println(
         WallService.add(
             Post(
+                id = null,
                 1,
-                1,
-                "Hi",
+                text = null,
                 "Test",
                 1,
                 1,
@@ -21,7 +21,7 @@ fun main() {
             Post(
                 1,
                 2,
-                "Hello",
+                text = null,
                 "Test2",
                 2,
                 2,
@@ -37,9 +37,9 @@ fun main() {
 }
 
 data class Post(
-    val id: Int,
+    val id: Int?,
     val date: Int,
-    var text: String,
+    var text: String?,
     var postType: String,
     val ownerId: Int,
     val fromId: Int,
@@ -47,7 +47,8 @@ data class Post(
     val canPin: Boolean,
     val canEdit: Boolean,
     val comments: Comments = Comments(0, true),
-    val likes: Likes = Likes(0, usersLike = true, canLike = true, canPublish = true)
+    val likes: Likes = Likes(0, usersLike = true, canLike = true, canPublish = true),
+    val attachment: Array<Attachment> = arrayOf()
 )
 
 data class Likes(
