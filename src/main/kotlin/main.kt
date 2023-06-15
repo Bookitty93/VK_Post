@@ -2,34 +2,58 @@ fun main() {
     println(
         WallService.add(
             Post(
-                id = null,
+                null,
                 1,
-                text = null,
-                "Test",
+                "Hi",
+                "Text",
                 1,
                 1,
-                1,
+                2,
                 canPin = true,
                 canEdit = true,
-                comments = Comments(count = 0, canPost = true),
-                likes = Likes(count = 0, usersLike = true, canLike = true, canPublish = true)
+                comments = Comments(1, false),
+                likes = Likes(1, usersLike = false, canLike = false, canPublish = false),
+                isFavorite = true,
+                postponedId = 1,
+                markedAsAds = 1,
+                canDelete = true,
+                signerId = 1,
+                copyHistory = emptyArray(),
+                repost = null,
+                replyPostId = 1,
+                friendsOnly = true,
+                replyOwnerId = 3,
+                geo = Geo("Geo", "65.13.22", null),
+                copyright = null
             )
         )
     )
     println(
         WallService.upDate(
             Post(
+                null,
+                1,
+                "Hi",
+                "Text",
+                1,
                 1,
                 2,
-                text = null,
-                "Test2",
-                2,
-                2,
-                2,
-                canPin = false,
-                canEdit = false,
-                comments = Comments(count = 1, canPost = false),
-                likes = Likes(count = 1, usersLike = false, canLike = false, canPublish = false)
+                canPin = true,
+                canEdit = true,
+                comments = Comments(1, false),
+                likes = Likes(1, usersLike = false, canLike = false, canPublish = false),
+                isFavorite = true,
+                postponedId = 1,
+                markedAsAds = 1,
+                canDelete = true,
+                signerId = 1,
+                copyHistory = emptyArray(),
+                repost = null,
+                replyPostId = 1,
+                friendsOnly = true,
+                replyOwnerId = 3,
+                geo = Geo("Geo", "65.13.22", null),
+                copyright = null
             )
         )
     )
@@ -48,6 +72,18 @@ data class Post(
     val canEdit: Boolean,
     val comments: Comments = Comments(0, true),
     val likes: Likes = Likes(0, usersLike = true, canLike = true, canPublish = true),
+    val isFavorite: Boolean,
+    val postponedId: Int,
+    val markedAsAds: Int,
+    val canDelete: Boolean,
+    val signerId: Int,
+    val copyHistory: Array<Boolean>,
+    val repost: Post?,
+    val replyPostId: Int,
+    val friendsOnly: Boolean,
+    val replyOwnerId: Int,
+    val geo: Geo,
+    val copyright: Copyright?,
     val attachment: Array<Attachment> = arrayOf()
 )
 
@@ -61,6 +97,15 @@ data class Likes(
 data class Comments(
     var count: Int,
     val canPost: Boolean,
+)
+
+data class Geo(val type: String, val coordinates: String, val place: Place?)
+class Place()
+data class Copyright(
+    val id: Int,
+    val link: String,
+    val name: String,
+    val type: String
 )
 
 object WallService {
