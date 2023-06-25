@@ -1,6 +1,5 @@
 fun main() {
     val comment = Comment(1, 1, 2, "hello")
-    println(WallService.createComment(1, comment))
     println(
         WallService.add(
             Post(
@@ -59,6 +58,7 @@ fun main() {
             )
         )
     )
+    println(WallService.createComment(3, comment))
 
 }
 
@@ -133,8 +133,9 @@ object WallService {
         for ((index, post) in posts.withIndex()) {
             if (postId == post.id) {
                 comments += comment
+                return comment
             }
-            return comment
+
         }
         throw PostNotFoundException("Hет такого айди: $postId")
     }
