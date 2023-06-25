@@ -1,4 +1,6 @@
 fun main() {
+    val comment = Comment(1, 1, 2, "hello")
+    println(WallService.createComment(1, comment))
     println(
         WallService.add(
             Post(
@@ -108,13 +110,33 @@ data class Copyright(
     val type: String
 )
 
+data class Comment(
+    val id: Int,
+    val fromId: Int,
+    val date: Int,
+    val text: String
+)
+
+class PostNotFoundException(message: String) : RuntimeException(message)
+
 object WallService {
     private var posts = emptyArray<Post>()
+    var comments = emptyArray<Comment>()
     private var id = 1
     fun add(post: Post): Post {
         val changePost = post.copy(id = id++)
         posts += changePost
         return posts.last()
+    }
+
+    fun createComment(postId: Int, comment: Comment): Comment {
+        for ((index, post) in posts.withIndex()) {
+            if (postId == post.id) {
+                comments += comment
+            }
+            return comment
+        }
+        throw PostNotFoundException("Hет такого айди: $postId")
     }
 
     fun upDate(newPost: Post): Boolean {
