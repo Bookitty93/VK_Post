@@ -132,7 +132,7 @@ object WallService {
     fun createComment(postId: Int, comment: Comment): Comment {
         for ((index, post) in posts.withIndex()) {
             if (postId == post.id) {
-                comments += comment
+                comments += comment.copy()
                 return comment
             }
 
@@ -154,7 +154,9 @@ object WallService {
 
     fun clear() {
         posts = emptyArray()
+        comments = emptyArray()
         id = 1
+
     }
 }
 
